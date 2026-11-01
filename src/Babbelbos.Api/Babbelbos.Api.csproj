@@ -1,6 +1,7 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
     <InvariantGlobalization>true</InvariantGlobalization>
+    <UserSecretsId>4d572cf0-ed9c-4324-bb0f-b9aa468a18c9</UserSecretsId>
     <UserSecretsId>babbelbos-api</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
