@@ -10,7 +10,7 @@ namespace Architecture.Tests;
 /// </summary>
 public class ModuleLayerTests
 {
-    private static readonly string[] Modules = ["Conversation"];
+    private static readonly string[] Modules = ["Conversations", "GnomeCatalog"];
 
     private static readonly string[] FrameworkNamespaces =
     [
@@ -18,6 +18,11 @@ public class ModuleLayerTests
         "Microsoft.AspNetCore",
         "Wolverine",
         "Npgsql",
+
+        // LLM provider SDKs belong in Infrastructure, behind our own ports.
+        "Microsoft.Extensions.AI",
+        "OpenAI",
+        "OllamaSharp",
     ];
 
     public static TheoryData<string> ModuleNames() => new(Modules);

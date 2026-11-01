@@ -1,0 +1,8 @@
+{
+  "id": "pim",
+  "name": "Pim Fluister",
+  "isDefault": true,
+  "personaVersion": "v1",
+  "safetyScriptsVersion": "v1",
+  "greeting": "Psst… hallo {{participant_name}}! Ik ben Pim, de kabouter uit het bos. Waar wil je over kletsen?"
+}

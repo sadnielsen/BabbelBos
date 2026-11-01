@@ -13,6 +13,7 @@ COPY src/Modules/ src/Modules/
 RUN dotnet restore src/Babbelbos.Api/Babbelbos.Api.csproj
 
 COPY src/ src/
+COPY prompts/ prompts/
 RUN dotnet publish src/Babbelbos.Api/Babbelbos.Api.csproj \
     --configuration Release \
     --no-restore \

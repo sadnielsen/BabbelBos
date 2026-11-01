@@ -1,6 +1,6 @@
 # CLAUDE.md — Babbelbos
 
-Instructies voor AI-codeerassistenten (Claude Code, Copilot, Cursor e.d.) die in deze repository werken. Lees dit eerst. Het volledige ontwerp staat in `docs/01-application-design.md`; de kabouter-prompt in `docs/02-kabouter-system-prompt.md` (wordt in iteratie 2 opgesplitst naar `prompts/`).
+Instructies voor AI-codeerassistenten (Claude Code, Copilot, Cursor e.d.) die in deze repository werken. Lees dit eerst. Het volledige ontwerp staat in `docs/01-application-design.md`; de kabouter-prompts staan in `prompts/` (zie `prompts/README.md`), met de toelichting in `docs/02-kabouter-system-prompt.md`.
 
 ## Wat is dit
 
@@ -47,11 +47,19 @@ Gebruik nooit `Child`, `Companion`, `User` of `ConversationMemory` voor deze beg
 
 ```bash
 dotnet build Babbelbos.slnx                                   # warnings zijn errors (Directory.Build.props)
-dotnet test --solution Babbelbos.slnx                         # alle tests (xUnit v3 op Microsoft.Testing.Platform)
+dotnet test --solution Babbelbos.slnx                         # alle tests (xUnit v3 op Microsoft.Testing.Platform); integratietests starten PostgreSQL via Testcontainers (Docker)
 dotnet format Babbelbos.slnx --verify-no-changes              # formatting check, zoals in CI
 dotnet run --project src/Babbelbos.AppHost                    # alles lokaal via Aspire (Docker nodig voor PostgreSQL)
 docker build -f src/Babbelbos.Api/Dockerfile -t babbelbos-api .   # container image van de API
+
+# EF Core-migratie toevoegen (per module, in Infrastructure/Persistence/Migrations)
+dotnet tool restore
+dotnet ef migrations add <Naam> --project src/Modules/Conversations/Conversations.Infrastructure \
+  --startup-project src/Modules/Conversations/Conversations.Infrastructure --output-dir Persistence/Migrations
 ```
+
+- Geen Docker voor de integratietests? Zet `BABBELBOS_TEST_POSTGRES` op een connection string naar een bestaande PostgreSQL-server; elke test maakt dan een eigen database.
+- LLM kiezen: `Llm:Provider` = `Fake` (standaard, geen netwerk), `OpenAI` of `Ollama`. Secrets alleen via user-secrets op `src/Babbelbos.Api` (`Llm:OpenAI:ApiKey`).
 
 Package-versies staan centraal in `Directory.Packages.props`; in een `.csproj` staat alleen `<PackageReference Include="..." />` zonder versie.
 
@@ -59,7 +67,7 @@ Package-versies staan centraal in `Directory.Packages.props`; in een `.csproj` s
 
 ## Architectuur — regels die je niet breekt
 
-1. **Modulaire monoliet.** Modules staan in `src/Modules/<Module>/` met lagen `Domain`, `Application`, `Infrastructure`, `Contracts`.
+1. **Modulaire monoliet.** Modules staan in `src/Modules/<Module>/` met lagen `Domain`, `Application`, `Infrastructure`, `Contracts`. Modulenamen zijn meervoud of een eigen naam (`Conversations`, `GnomeCatalog`), zodat een aggregate dezelfde naam als het concept kan hebben (`Conversation`) zonder te botsen met de namespace. Een nieuwe module komt ook in de lijst in `tests/Architecture.Tests/ModuleLayerTests.cs`.
 2. **Afhankelijkheden wijzen naar binnen.** `Domain` heeft geen referenties (ook niet naar EF, Wolverine of ASP.NET). `Application` kent alleen `Domain` en `BuildingBlocks`. `Infrastructure` implementeert interfaces uit `Application`.
 3. **Modules praten via `Contracts`** (integration events, publieke queries). Nooit een andere module zijn `Domain`, `Infrastructure` of tabellen gebruiken.
 4. **Elke module heeft een eigen DB-schema** (`conversation`, `safeguarding`, `household`, …).
@@ -82,7 +90,7 @@ Package-versies staan centraal in `Directory.Packages.props`; in een `.csproj` s
 
 ## Multi-tenancy
 
-- **Elke** tenant-gebonden entiteit heeft `TenantId`. Uitzondering: `Caregiver` is een persoon en is niet tenant-gebonden; zijn rechten per tenant komen uit `SupportRelation`, `CareUnit`-lidmaatschap en `TenantMembership`. Nieuwe tabel? Dan ook: EF global query filter én een RLS-policy in de migratie.
+- **Elke** tenant-gebonden entiteit heeft `TenantId`. Uitzondering: `Caregiver` is een persoon en is niet tenant-gebonden; zijn rechten per tenant komen uit `SupportRelation`, `CareUnit`-lidmaatschap en `TenantMembership`. Nieuwe tabel? Dan ook een EF global query filter op de tenant. Vanaf iteratie 7 (aparte database-rol zonder superuser-rechten) komt daar een RLS-policy in de migratie bij.
 - Haal de tenant alleen uit `ITenantContext`, nooit uit request-body of query string.
 - Schrijf bij elke nieuwe query een integratietest die bewijst dat tenant B de data van tenant A niet ziet.
 
@@ -90,7 +98,7 @@ Package-versies staan centraal in `Directory.Packages.props`; in een `.csproj` s
 
 - Roep een LLM alleen aan via de ports in `Application` (`IChatCompletionService`, `ISafetyClassifier`, `IConversationSummarizer`). Nooit een SDK van een provider direct gebruiken buiten `Infrastructure`.
 - Prompts staan als bestanden in `prompts/` met een versie in de bestandsnaam (`v1.md`). **Wijzig nooit een bestaande versie**; maak `v2.md` en zet de configuratie om. Sla de gebruikte promptversie op bij elk kabouter-bericht.
-- Elke wijziging in `prompts/` vereist dat de prompt-evals (`tests/Prompt.Evals`) slagen.
+- Elke wijziging in `prompts/` vereist dat de prompt-evals (`tests/Prompt.Evals`, komt nog) slagen. Tot die er zijn: `tests/GnomeCatalog.Tests` laadt de echte promptbestanden en moet groen blijven.
 - Unit tests gebruiken een fake LLM (deterministisch). Geen echte LLM-aanroepen in unit- of integratietests.
 
 ## Veiligheid (dit is het belangrijkste onderdeel van de app)
@@ -132,5 +140,6 @@ Package-versies staan centraal in `Directory.Packages.props`; in een `.csproj` s
 - Geen microservices opsplitsen in de MVP.
 - Geen `DbContext` buiten `Infrastructure`.
 - Geen logica in endpoints; die roepen alleen Wolverine aan.
+- Geen `internal` types die Wolverine-handlers nodig hebben, en geen DI-registraties met een factory-lambda voor die types: Wolverine genereert code die ze direct aanmaakt (anders: `InvalidServiceLocationException`).
 - Geen `async void`, geen `.Result`/`.Wait()`.
 - Geen secrets in de repo; lokaal user-secrets/`.env` (genegeerd), in k8s via secrets/External Secrets.
