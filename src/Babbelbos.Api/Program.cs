@@ -9,6 +9,8 @@ using Conversations.Infrastructure;
 
 using GnomeCatalog.Infrastructure;
 
+using Scalar.AspNetCore;
+
 using Wolverine;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +24,7 @@ builder.Host.UseWolverine(options =>
 });
 
 builder.Services.AddProblemDetails();
+builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IClock, SystemClock>();
 
 // TEMPORARY until sign-in exists (iteration 4): tenant and participant come from configuration.
@@ -40,8 +43,19 @@ if (app.Environment.IsDevelopment())
     await app.Services.MigrateConversationsDatabaseAsync();
 }
 
+if (app.Environment.IsDevelopment())
+{
+    // Try the API in the browser: /scalar (OpenAPI document at /openapi/v1.json). Development only.
+    app.MapOpenApi();
+    app.MapScalarApiReference();
+}
+
 app.MapDefaultEndpoints();
-app.MapGet("/", () => Results.Ok(new { name = "Babbelbos API" }));
+app.MapGet("/", (IHostEnvironment environment) => Results.Ok(new
+{
+    name = "Babbelbos API",
+    tryIt = environment.IsDevelopment() ? "/scalar" : null,
+})).ExcludeFromDescription();
 app.MapConversationEndpoints();
 
 await app.RunAsync();

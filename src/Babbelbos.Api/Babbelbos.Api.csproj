@@ -5,6 +5,8 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WolverineFx" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" />
+    <PackageReference Include="Scalar.AspNetCore" />
     <!-- Dynamic handler code generation; switch to pre-generated code (TypeLoadMode.Static) for production later. -->
     <PackageReference Include="WolverineFx.RuntimeCompilation" />
   </ItemGroup>
