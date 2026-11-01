@@ -1,0 +1,14 @@
+<Project Sdk="Aspire.AppHost.Sdk/13.6.4">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UserSecretsId>babbelbos-apphost</UserSecretsId>
+    <!-- The Aspire CLI bundle is optional for this project; dotnet run is enough. -->
+    <NoWarn>$(NoWarn);ASPIRE010</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Aspire.Hosting.PostgreSQL" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Babbelbos.Api\Babbelbos.Api.csproj" />
+  </ItemGroup>
+</Project>
