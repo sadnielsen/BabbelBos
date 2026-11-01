@@ -2,7 +2,6 @@
   <PropertyGroup>
     <InvariantGlobalization>true</InvariantGlobalization>
     <UserSecretsId>4d572cf0-ed9c-4324-bb0f-b9aa468a18c9</UserSecretsId>
-    <UserSecretsId>babbelbos-api</UserSecretsId>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="WolverineFx" />
