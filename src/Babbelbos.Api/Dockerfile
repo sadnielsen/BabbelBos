@@ -4,7 +4,7 @@ FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
 WORKDIR /repo
 
 # Restore first, so this layer is cached as long as the project files do not change.
-COPY global.json nuget.config Directory.Build.props Directory.Packages.props ./
+COPY global.json nuget.config .editorconfig Directory.Build.props Directory.Packages.props ./
 COPY src/Babbelbos.Api/Babbelbos.Api.csproj src/Babbelbos.Api/
 COPY src/Babbelbos.ServiceDefaults/Babbelbos.ServiceDefaults.csproj src/Babbelbos.ServiceDefaults/
 COPY src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj src/BuildingBlocks/BuildingBlocks.Domain/
