@@ -21,7 +21,7 @@ jobs:
     name: Build, format and test
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - uses: actions/setup-dotnet@v4
         with:
@@ -51,7 +51,7 @@ jobs:
     runs-on: ubuntu-latest
     needs: build-and-test
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Build API image
         run: docker build -f src/Babbelbos.Api/Dockerfile -t babbelbos-api:${{ github.sha }} .
