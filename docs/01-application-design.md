@@ -381,7 +381,7 @@ src/
   Babbelbos.Api/                         # ASP.NET Core host, endpoints, auth, DI-compositie
   Babbelbos.Worker/                      # (optioneel) aparte host voor achtergrondtaken
   Modules/
-    Conversation/
+    Conversations/
       Conversation.Domain/               # aggregates, value objects, domain events — geen dependencies
       Conversation.Application/          # commands, queries, handlers, ports (interfaces)
       Conversation.Infrastructure/       # EF Core, LLM-adapters, repositories

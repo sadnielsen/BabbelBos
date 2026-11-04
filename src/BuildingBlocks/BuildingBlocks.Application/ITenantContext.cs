@@ -1,3 +1,5 @@
+using BuildingBlocks.Domain;
+
 namespace BuildingBlocks.Application;
 
 /// <summary>
@@ -6,5 +8,5 @@ namespace BuildingBlocks.Application;
 /// </summary>
 public interface ITenantContext
 {
-    Guid TenantId { get; }
+    TenantId TenantId { get; }
 }
