@@ -1,7 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <ItemGroup>
-    <ProjectReference Include="..\Conversation.Domain\Conversation.Domain.csproj" />
-    <ProjectReference Include="..\Conversation.Contracts\Conversation.Contracts.csproj" />
-    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
-  </ItemGroup>
-</Project>

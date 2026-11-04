@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Modules\GnomeCatalog\GnomeCatalog.Infrastructure\GnomeCatalog.Infrastructure.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\prompts\**\*" LinkBase="prompts" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+</Project>
