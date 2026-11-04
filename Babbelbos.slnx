@@ -9,15 +9,24 @@
     <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" />
   </Folder>
   <Folder Name="/src/Modules/" />
-  <Folder Name="/src/Modules/Conversation/">
-    <Project Path="src/Modules/Conversation/Conversation.Application/Conversation.Application.csproj" />
-    <Project Path="src/Modules/Conversation/Conversation.Contracts/Conversation.Contracts.csproj" />
-    <Project Path="src/Modules/Conversation/Conversation.Domain/Conversation.Domain.csproj" />
-    <Project Path="src/Modules/Conversation/Conversation.Infrastructure/Conversation.Infrastructure.csproj" />
+  <Folder Name="/src/Modules/Conversations/">
+    <Project Path="src/Modules/Conversations/Conversations.Application/Conversations.Application.csproj" />
+    <Project Path="src/Modules/Conversations/Conversations.Contracts/Conversations.Contracts.csproj" />
+    <Project Path="src/Modules/Conversations/Conversations.Domain/Conversations.Domain.csproj" />
+    <Project Path="src/Modules/Conversations/Conversations.Infrastructure/Conversations.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/GnomeCatalog/">
+    <Project Path="src/Modules/GnomeCatalog/GnomeCatalog.Application/GnomeCatalog.Application.csproj" />
+    <Project Path="src/Modules/GnomeCatalog/GnomeCatalog.Contracts/GnomeCatalog.Contracts.csproj" />
+    <Project Path="src/Modules/GnomeCatalog/GnomeCatalog.Domain/GnomeCatalog.Domain.csproj" />
+    <Project Path="src/Modules/GnomeCatalog/GnomeCatalog.Infrastructure/GnomeCatalog.Infrastructure.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Architecture.Tests/Architecture.Tests.csproj" />
     <Project Path="tests/Babbelbos.Api.Tests/Babbelbos.Api.Tests.csproj" />
     <Project Path="tests/BuildingBlocks.Domain.Tests/BuildingBlocks.Domain.Tests.csproj" />
+    <Project Path="tests/Conversations.Application.Tests/Conversations.Application.Tests.csproj" />
+    <Project Path="tests/Conversations.Domain.Tests/Conversations.Domain.Tests.csproj" />
+    <Project Path="tests/GnomeCatalog.Tests/GnomeCatalog.Tests.csproj" />
   </Folder>
 </Solution>

@@ -1,0 +1,9 @@
+{
+  "SuicidalIdeation": "{{participant_name}}, ik ben blij dat je het mij vertelt. Je bent heel belangrijk. Ga nu naar {{primary_trusted_adult}} en vertel het. Dan kan {{primary_trusted_adult}} je helpen.",
+  "SelfHarm": "{{participant_name}}, ik ben blij dat je het mij vertelt. Je bent heel belangrijk. Ga nu naar {{primary_trusted_adult}} en vertel het. Dan kan {{primary_trusted_adult}} je helpen.",
+  "Abuse": "Dank je dat je het vertelt, {{participant_name}}. Het is niet jouw schuld. Ga naar een grote mens die je vertrouwt en vertel het. Dat is heel dapper.",
+  "Neglect": "{{participant_name}}, ik wil dat een grote mens goed voor je zorgt. Ga naar een grote mens die je vertrouwt en vertel het.",
+  "MedicalEmergency": "{{participant_name}}, roep nu meteen een grote mens. Roep heel hard: help! Ga naar {{primary_trusted_adult}}.",
+  "Default": "{{participant_name}}, ik ben blij dat je het mij vertelt. Ga nu naar een grote mens die je vertrouwt en vertel het.",
+  "Fallback": "{{participant_name}}, Pim moet even nadenken. Wil je het straks nog een keer zeggen? Is er iets moeilijk? Ga dan naar een grote mens die je vertrouwt."
+}

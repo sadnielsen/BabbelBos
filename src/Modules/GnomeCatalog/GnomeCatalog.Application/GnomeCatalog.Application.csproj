@@ -1,0 +1,7 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <ItemGroup>
+    <ProjectReference Include="..\GnomeCatalog.Domain\GnomeCatalog.Domain.csproj" />
+    <ProjectReference Include="..\GnomeCatalog.Contracts\GnomeCatalog.Contracts.csproj" />
+    <ProjectReference Include="..\..\..\BuildingBlocks\BuildingBlocks.Application\BuildingBlocks.Application.csproj" />
+  </ItemGroup>
+</Project>

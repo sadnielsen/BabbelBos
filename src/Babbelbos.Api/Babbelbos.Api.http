@@ -1,0 +1,18 @@
+# Try the API from your editor (VS Code REST Client, Rider or Visual Studio).
+@api = http://localhost:5080
+
+### Start a conversation
+POST {{api}}/api/conversations
+
+### Say something (paste the conversationId from the response above)
+@conversationId = 00000000-0000-0000-0000-000000000000
+POST {{api}}/api/conversations/{{conversationId}}/messages
+Content-Type: application/json
+
+{ "text": "Ik heb vandaag een tekening gemaakt van een trein!" }
+
+### Read the conversation
+GET {{api}}/api/conversations/{{conversationId}}
+
+### End the conversation
+POST {{api}}/api/conversations/{{conversationId}}/close
