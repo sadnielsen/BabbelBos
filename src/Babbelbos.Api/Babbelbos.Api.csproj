@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="WolverineFx" />
+    <!-- Dynamic handler code generation; switch to pre-generated code (TypeLoadMode.Static) for production later. -->
+    <PackageReference Include="WolverineFx.RuntimeCompilation" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Babbelbos.ServiceDefaults\Babbelbos.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\Modules\Conversation\Conversation.Infrastructure\Conversation.Infrastructure.csproj" />
+  </ItemGroup>
+</Project>

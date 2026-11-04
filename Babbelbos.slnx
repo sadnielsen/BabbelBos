@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Babbelbos.Api/Babbelbos.Api.csproj" />
+    <Project Path="src/Babbelbos.AppHost/Babbelbos.AppHost.csproj" />
+    <Project Path="src/Babbelbos.ServiceDefaults/Babbelbos.ServiceDefaults.csproj" />
+  </Folder>
+  <Folder Name="/src/BuildingBlocks/">
+    <Project Path="src/BuildingBlocks/BuildingBlocks.Application/BuildingBlocks.Application.csproj" />
+    <Project Path="src/BuildingBlocks/BuildingBlocks.Domain/BuildingBlocks.Domain.csproj" />
+  </Folder>
+  <Folder Name="/src/Modules/" />
+  <Folder Name="/src/Modules/Conversation/">
+    <Project Path="src/Modules/Conversation/Conversation.Application/Conversation.Application.csproj" />
+    <Project Path="src/Modules/Conversation/Conversation.Contracts/Conversation.Contracts.csproj" />
+    <Project Path="src/Modules/Conversation/Conversation.Domain/Conversation.Domain.csproj" />
+    <Project Path="src/Modules/Conversation/Conversation.Infrastructure/Conversation.Infrastructure.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Architecture.Tests/Architecture.Tests.csproj" />
+    <Project Path="tests/Babbelbos.Api.Tests/Babbelbos.Api.Tests.csproj" />
+    <Project Path="tests/BuildingBlocks.Domain.Tests/BuildingBlocks.Domain.Tests.csproj" />
+  </Folder>
+</Solution>
