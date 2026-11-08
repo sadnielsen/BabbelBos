@@ -3,8 +3,8 @@
     <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
   </PropertyGroup>
   <ItemGroup Label="Runtime">
-    <PackageVersion Include="WolverineFx" Version="6.60.0" />
-    <PackageVersion Include="WolverineFx.RuntimeCompilation" Version="6.60.0" />
+    <PackageVersion Include="WolverineFx" Version="6.62.0" />
+    <PackageVersion Include="WolverineFx.RuntimeCompilation" Version="6.62.0" />
     <PackageVersion Include="Aspire.Hosting.PostgreSQL" Version="13.6.4" />
     <PackageVersion Include="Microsoft.Extensions.Http.Resilience" Version="10.11.0" />
     <PackageVersion Include="Microsoft.Extensions.ServiceDiscovery" Version="10.11.0" />
