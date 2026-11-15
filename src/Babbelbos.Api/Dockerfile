@@ -1,6 +1,6 @@
 # Build from the repository root:
 #   docker build -f src/Babbelbos.Api/Dockerfile -t babbelbos-api .
-FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build
+FROM mcr.microsoft.com/dotnet/sdk:11.0 AS build
 WORKDIR /repo
 
 # Restore first, so this layer is cached as long as the project files do not change.
